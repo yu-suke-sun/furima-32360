@@ -21,10 +21,9 @@ class User < ApplicationRecord
     validates :first_name_kana
   end
 
-  with_options presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: '英字と数字の両方を含めて設定してください' } do
+  with_options presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: '英字と数字の両方を含めて設定してください' } do
     validates :password
   end
-
 
   has_many :items
   has_many :purchases
