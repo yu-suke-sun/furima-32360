@@ -6,7 +6,9 @@ class Item < ApplicationRecord
   belongs_to :area
   belongs_to :days
 
-  with_options presence: true, do
+
+  with_options presence: true do
+    validates :image
     validates :name
     validates :description
     validates :price
@@ -20,9 +22,9 @@ class Item < ApplicationRecord
     validates :days_id
   end
 
-  validates :price, numericality: { greater_than: 300, less_than: 9999999, message: '¥300〜9,999,999内で入力してください' }
+  validates :price, numericality: {only_integer: true, message: '半角数字で入力してください'}
 
-  validates :price, format: { with: /^[0-9]+$/, message: '半角数字を使用してください' }
+  validates :price, numericality: {greater_than: 299, less_than: 10000000, message: '¥300〜9,999,999内で入力してください'}
 
   belongs_to :user
   has_one_attached :image
