@@ -25,4 +25,5 @@ class Item < ApplicationRecord
   validates :price, format: { with: /^[0-9]+$/, message: '半角数字を使用してください' }
 
   belongs_to :user
+  has_one_attached :image
 end
