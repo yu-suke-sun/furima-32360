@@ -5,9 +5,9 @@ FactoryBot.define do
     category_id    { '3' }
     condition_id   { '3' }
     deliveryfee_id { '3' }
-    area_id            { '3' }
-    days_id      { '3' }
-    price       { 10000 }
+    area_id { '3' }
+    days_id { '3' }
+    price       { 10_000 }
     association :user
 
     after(:build) do |message|
