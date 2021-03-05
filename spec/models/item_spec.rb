@@ -37,31 +37,31 @@ RSpec.describe Item, type: :model do
       end
 
       it 'category_idの情報が「---」だと登録できない' do
-        @item.category_id = '1'
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
 
       it 'condition_idの情報が「---」だと登録できない' do
-        @item.condition_id = '1'
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Condition must be other than 1')
       end
 
       it 'deliveryfee_idの情報が「---」だと登録できない' do
-        @item.deliveryfee_id = '1'
+        @item.deliveryfee_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Deliveryfee must be other than 1')
       end
 
       it 'area_idの情報が「---」だと登録できない' do
-        @item.area_id = '1'
+        @item.area_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Area must be other than 1')
       end
 
       it 'days_idの情報が「---」だと登録できない' do
-        @item.days_id = '1'
+        @item.days_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Days must be other than 1')
       end
@@ -82,6 +82,24 @@ RSpec.describe Item, type: :model do
         @item.price = '12３４５'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price 半角数字で入力してください')
+      end
+
+      it 'priceが半角英数混合では登録できない' do
+        @item.price = '12as12'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price 半角数字で入力してください")
+      end
+
+      it 'priceが半角英語だけでは登録できない' do
+        @item.price = 'price'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price 半角数字で入力してください")
+      end
+
+      it 'priceが¥10,000,000以上では登録できない' do
+        @item.price = '10000000'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price ¥300〜9,999,999内で入力してください")
       end
 
       it 'userが紐付いていないと保存できないこと' do
