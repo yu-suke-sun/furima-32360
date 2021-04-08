@@ -1,4 +1,4 @@
-class Purchaseitem
+class PurchaseItem
   include ActiveModel::Model
   attr_accessor :postal_code, :area_id, :municipality, :address, :building_name, :telephone_number, :purchase_id, :user_id, :item_id
 
