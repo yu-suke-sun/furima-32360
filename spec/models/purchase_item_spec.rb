@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe PurchaseItem, type: :model do
-
   describe '商品購入機能' do
     before do
       @purchase_item = FactoryBot.build(:purchase_item)
@@ -27,12 +26,12 @@ RSpec.describe PurchaseItem, type: :model do
       it 'postal_codeにハイフンがない時は購入できない' do
         @purchase_item.postal_code = '8150082'
         @purchase_item.valid?
-        expect(@purchase_item.errors.full_messages).to include("Postal code Input correctly")
+        expect(@purchase_item.errors.full_messages).to include('Postal code Input correctly')
       end
       it 'area_idがnilの時は購入できない' do
         @purchase_item.area_id = nil
         @purchase_item.valid?
-        expect(@purchase_item.errors.full_messages).to include("Area Select")
+        expect(@purchase_item.errors.full_messages).to include('Area Select')
       end
       it 'municipalityがnilの時は購入できない' do
         @purchase_item.municipality = nil
@@ -52,12 +51,12 @@ RSpec.describe PurchaseItem, type: :model do
       it 'telephone_numberにハイフンがある時は購入できない' do
         @purchase_item.telephone_number = '0120-822212'
         @purchase_item.valid?
-        expect(@purchase_item.errors.full_messages).to include("Telephone number Input only number")
+        expect(@purchase_item.errors.full_messages).to include('Telephone number Input only number')
       end
       it 'telephone_numberが12桁以上だと購入できない' do
         @purchase_item.telephone_number = '012012345676'
         @purchase_item.valid?
-        expect(@purchase_item.errors.full_messages).to include("Telephone number Input only number")
+        expect(@purchase_item.errors.full_messages).to include('Telephone number Input only number')
       end
       it 'user_idが紐付いてないと購入できない' do
         @purchase_item.user_id = nil
