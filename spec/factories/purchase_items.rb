@@ -5,8 +5,7 @@ FactoryBot.define do
     area_id          { 3 }
     municipality     { Faker::Address.city }
     address          { Faker::Address.street_address }
+    building_name    { Faker::Name.initials(number: 2) }
     telephone_number { '09065676655' }
-    user_id { 1 }
-    item_id { 5 }
   end
 end

@@ -4,10 +4,16 @@ RSpec.describe PurchaseItem, type: :model do
   describe '商品購入機能' do
     before do
       @purchase_item = FactoryBot.build(:purchase_item)
+      @purchase_item.user_id = FactoryBot.build(:user)
+      @purchase_item.item_id = FactoryBot.build(:item)
     end
 
     context '商品が購入できる時' do
       it '値が正しく入力されていれば購入できる' do
+        expect(@purchase_item).to be_valid
+      end
+      it '建物名が抜けていても購入できる' do
+        @purchase_item.building_name = nil
         expect(@purchase_item).to be_valid
       end
     end
@@ -33,6 +39,11 @@ RSpec.describe PurchaseItem, type: :model do
         @purchase_item.valid?
         expect(@purchase_item.errors.full_messages).to include('Area Select')
       end
+      it 'area_idが１の時は購入できない' do
+        @purchase_item.area_id = '1'
+        @purchase_item.valid?
+        expect(@purchase_item.errors.full_messages).to include('Area Select')
+      end
       it 'municipalityがnilの時は購入できない' do
         @purchase_item.municipality = nil
         @purchase_item.valid?
@@ -55,6 +66,11 @@ RSpec.describe PurchaseItem, type: :model do
       end
       it 'telephone_numberが12桁以上だと購入できない' do
         @purchase_item.telephone_number = '012012345676'
+        @purchase_item.valid?
+        expect(@purchase_item.errors.full_messages).to include('Telephone number Input only number')
+      end
+      it 'telephone_numberは英数混合では購入できない' do
+        @purchase_item.telephone_number = '012s01234ab'
         @purchase_item.valid?
         expect(@purchase_item.errors.full_messages).to include('Telephone number Input only number')
       end
