@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe PurchaseItem, type: :model do
   describe '商品購入機能' do
     before do
-      @purchase_item = FactoryBot.build(:purchase_item)
-      @purchase_item.user_id = FactoryBot.build(:user)
-      @purchase_item.item_id = FactoryBot.build(:item)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      @purchase_item = FactoryBot.build(:purchase_item, user_id: user.id, item_id: item.id)
+      sleep 0.1
     end
 
     context '商品が購入できる時' do
