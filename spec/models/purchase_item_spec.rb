@@ -40,7 +40,7 @@ RSpec.describe PurchaseItem, type: :model do
         expect(@purchase_item.errors.full_messages).to include('Area Select')
       end
       it 'area_idが１の時は購入できない' do
-        @purchase_item.area_id = '1'
+        @purchase_item.area_id = 1
         @purchase_item.valid?
         expect(@purchase_item.errors.full_messages).to include('Area Select')
       end
